@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ActvTest</string>
+    <string name="tv">Select States  </string>
+    <string-array name="states">
+        <item>Select </item>
+        <item>AP</item>
+        <item>Maharashtra</item>
+        <item>Goa</item>
+        <item>Gujrat</item>
+        <item>Telangana</item>
+        <item>MP</item>
+        <item>Keral</item>
+        <item>Utterpradesh</item>
+    </string-array>
+</resources>
