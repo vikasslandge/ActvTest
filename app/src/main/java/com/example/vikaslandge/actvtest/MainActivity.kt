@@ -15,27 +15,42 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val values = resources.getStringArray(R.array.states)
-        val myadapter = ArrayAdapter <String> (this@MainActivity,
-                android.R.layout.simple_list_item_single_choice,values)
-        actv.setAdapter(myadapter)
-        actv.threshold=1
-        actv.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
 
-            //Toast.makeText(this,"Not selected",Toast.LENGTH_LONG).show()
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+        // Initialize a new array adapter object
+        val adapter = ArrayAdapter<String>(
+                this, // Context
+                android.R.layout.simple_selectable_list_item, // Layout
+                values // Array
+        )
 
-                Toast.makeText(this@MainActivity,"Not selected",Toast.LENGTH_LONG).show()
-             }
 
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, id: Long) {
+        // Set the AutoCompleteTextView adapter
+        actv.setAdapter(adapter)
 
-                Toast.makeText(this@MainActivity,values[p2].toString() ,Toast.LENGTH_LONG).show()
-                //tv2.text = values[p2]
 
-                     }
-                }
+        // Auto complete threshold
+        // The minimum number of characters to type to show the drop down
+        actv.threshold = 1
+
+        // Set an item click listener for auto complete text view
+        actv.onItemClickListener = AdapterView.OnItemClickListener{
+            parent,view,position,id->
+            val selectedItem = parent.getItemAtPosition(position).toString()
+            // Display the clicked item using toast
+            tv2.text= selectedItem
+            Toast.makeText(applicationContext,"Selected : $selectedItem",Toast.LENGTH_SHORT).show()
+        }
+
+         // Set a dismiss listener for auto complete text view
+        actv.setOnDismissListener {
+            Toast.makeText(this,"Suggestion closed.",Toast.LENGTH_SHORT).show()
+        }
+
     }
 }
+
+
+
 
  
